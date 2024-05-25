@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, make_response
 
 
 app = Flask(__name__)
@@ -11,17 +11,24 @@ def get_main():
 
 @app.get('/services')
 def get_services():
-    return "Услуги"
+    return render_template("base.html", title="Услуги")
 
 
 @app.get('/contacts')
 def get_contacts():
-    return "Контакты"
+    return render_template("base.html", title="Контакты")
 
 
 @app.get('/reviews')
 def get_reviews():
-    return "Отзывы"
+    return render_template("base.html", title="Отзывы")
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return 'Страница не найдена', 404
+
+
 
 
 """
